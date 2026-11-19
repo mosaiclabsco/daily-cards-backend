@@ -1,0 +1,7 @@
+{
+  "regions": ["gru1"],
+  "crons": [
+    { "path": "/api/cron/trends", "schedule": "0 9 * * *" },
+    { "path": "/api/cron/emails", "schedule": "0 12 * * *" }
+  ]
+}

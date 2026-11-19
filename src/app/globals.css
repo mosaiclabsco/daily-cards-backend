@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #fafaf9;
+  --fg: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --accent: #2563eb;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09;
+    --fg: #f5f5f4;
+    --muted: #a8a29e;
+    --line: #292524;
+    --accent: #60a5fa;
+  }
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+.input {
+  @apply w-full rounded-md border px-3 py-2 text-sm bg-transparent;
+  border-color: var(--line);
+}
+.btn {
+  @apply inline-flex items-center rounded-md px-3 py-1.5 text-sm font-medium text-white;
+  background: var(--accent);
+}
+.btn-ghost {
+  @apply inline-flex items-center rounded-md border px-3 py-1.5 text-sm;
+  border-color: var(--line);
+}
+.muted {
+  color: var(--muted);
+}
+.card {
+  @apply rounded-lg border p-4;
+  border-color: var(--line);
+}
