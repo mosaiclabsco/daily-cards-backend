@@ -1,0 +1,63 @@
+{
+  "app": {
+    "name": "Daily Cards"
+  },
+  "onboarding": {
+    "chooseProfession": "Qual é a sua profissão?",
+    "professionMissing": "Minha profissão não está aqui",
+    "relationship": {
+      "title": "Qual é a sua relação com essa área?",
+      "works": "Já atuo",
+      "studies": "Sou estudante",
+      "curious": "Só curiosidade"
+    }
+  },
+  "card": {
+    "types": {
+      "term": "Termo",
+      "tip": "Dica",
+      "question": "Pergunta",
+      "trend": "Trend"
+    },
+    "source": "Fonte",
+    "rate": "Avalie este card",
+    "suggestFix": "Sugerir correção",
+    "seeExplanation": "Ver explicação"
+  },
+  "report": {
+    "categories": {
+      "incorrect": "Informação incorreta",
+      "outdated": "Desatualizada",
+      "incomplete": "Incompleta",
+      "confusing": "Explicação confusa",
+      "context": "Depende do contexto"
+    }
+  },
+  "group": {
+    "tecnologia": "Tecnologia",
+    "negocios": "Negócios",
+    "design": "Design",
+    "educacao": "Educação",
+    "saude": "Saúde",
+    "direito": "Direito",
+    "arquitetura_engenharia": "Arquitetura e engenharia"
+  },
+  "area": {
+    "desenvolvimentoSoftware": "Desenvolvimento de software",
+    "iaAplicada": "IA aplicada",
+    "marketingDigital": "Marketing digital",
+    "socialMediaCriadores": "Social media e criadores de conteúdo",
+    "produto": "Produto (PM)",
+    "rh": "RH",
+    "corretorImoveis": "Corretor de imóveis",
+    "designUxUi": "Design (UX/UI)",
+    "professores": "Professores",
+    "odontologia": "Odontologia",
+    "direito": "Direito",
+    "arquitetura": "Arquitetura",
+    "engenhariaCivil": "Engenharia civil",
+    "nutricao": "Nutrição",
+    "fisioterapia": "Fisioterapia",
+    "educacaoFisica": "Educação física"
+  }
+}

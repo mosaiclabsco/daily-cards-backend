@@ -1,13 +1,31 @@
-/node_modules
-/coverage
-/.next/
-/out/
-/build
+node_modules/
+.env
+.env*.local
 .DS_Store
+*.log
+coverage/
+
+# Expo
+.expo/
+dist/
+web-build/
+mobile/android/
+mobile/ios/
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
 *.pem
-.env*
-!.env.example
-.vercel
-*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+.vercel/
 next-env.d.ts
-/generated/
+*.tsbuildinfo
+generated/
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
