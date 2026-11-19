@@ -66,7 +66,7 @@ Gerar rascunhos: `pnpm cards:generate --area software --type term --count 10`, d
 
 ## Colocar no ar
 
-1. **Supabase**: criar o projeto em `sa-east-1`. Aplicar `supabase/migrations/*.sql` em ordem (SQL editor ou `supabase db push`) e depois `supabase/seed.sql`.
+1. **Supabase**: criar o projeto em `us-west-2` (Oregon; app global, funções da Vercel em `pdx1`). Aplicar `supabase/migrations/*.sql` em ordem (SQL editor ou `supabase db push`) e depois `supabase/seed.sql`.
 2. **Auth**: ativar confirmação de e-mail, Google e Apple. Configurar o e-mail de recuperação de senha.
 3. **Admin**: criar o usuário em Authentication e rodar `insert into public.admins (user_id) values ('<uuid>');`.
 4. **Vercel**: importar o repositório e cadastrar as variáveis do `.env.example`. Os crons estão em `vercel.json` (diários, compatíveis com o plano Hobby).
