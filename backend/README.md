@@ -6,7 +6,7 @@ O app Expo fica em `../mobile` e fala direto com o Supabase via RLS + RPCs. Tudo
 ## Estrutura
 
 - `supabase/migrations/` — schema, RLS e RPCs (`0001_init.sql`) e agendamento pg_cron (`0002_cron.sql`).
-- `supabase/seed.sql` — 16 profissões com camada no Brasil, fontes de trend iniciais e 7 cards de exemplo (Desenvolvimento de software).
+- `supabase/seed.sql` — 19 profissões com camada no Brasil e 7 cards de exemplo genéricos (Desenvolvimento de software). Fontes de trend e conteúdo real entram pelo admin.
 - `supabase/tests/` — testes do banco em PGlite (sem Docker).
 - `src/app/admin/` — painel: cards, revisão, trends, importar, lista de espera.
 - `src/app/api/` — webhook RevenueCat, exclusão de conta, crons (trends e e-mails).
@@ -70,5 +70,6 @@ Gerar rascunhos: `pnpm cards:generate --area software --type term --count 10`, d
 2. **Auth**: ativar confirmação de e-mail, Google e Apple. Configurar o e-mail de recuperação de senha.
 3. **Admin**: criar o usuário em Authentication e rodar `insert into dailycards.admins (user_id) values ('<uuid>');`.
 4. **Vercel**: projeto com Root Directory `backend`; cadastrar as variáveis do `.env.example`. Os crons estão em `vercel.json` (diários, compatíveis com o plano Hobby).
-5. **pg_cron**: as regras de feedback rodam de hora em hora pela migração `0002_cron.sql`. Conferir em Database › Cron Jobs.
-6. **RevenueCat**: entitlement `premium`; webhook para `https://<domínio>/api/webhooks/revenuecat` com o header `Authorization: Bearer <REVENUECAT_WEBHOOK_SECRET>`; chave secreta v1 em `REVENUECAT_SECRET_API_KEY`.
+5. **Fontes de trend**: cadastrar em Admin › Trends a lista da aba Fontes de trends do documento do MVP.
+6. **pg_cron**: as regras de feedback rodam de hora em hora pela migração `0002_cron.sql`. Conferir em Database › Cron Jobs.
+7. **RevenueCat**: entitlement `premium`; webhook para `https://<domínio>/api/webhooks/revenuecat` com o header `Authorization: Bearer <REVENUECAT_WEBHOOK_SECRET>`; chave secreta v1 em `REVENUECAT_SECRET_API_KEY`.

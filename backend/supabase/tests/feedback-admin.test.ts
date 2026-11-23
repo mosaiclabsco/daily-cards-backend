@@ -164,3 +164,35 @@ describe("admin", () => {
     await expect(as(db, users[0], "select dailycards.admin_import_cards('[]')")).rejects.toThrow("forbidden");
   });
 });
+
+describe("fonte da sugestão", () => {
+  const send = (src: string | null) =>
+    as(db, users[0], "select dailycards.report_card($1, 'incorrect', 'errado', $2)", [card, src]);
+
+  it("aceita referência em texto e link https", async () => {
+    await send("Lindhe, Tratado de Periodontia, cap. 3");
+    await send("https://sre.google/sre-book/postmortem-culture/");
+    await send("https://medium.com/@autor/post");
+    const rows = await db.query("select source from dailycards.reports order by created_at");
+    expect(rows.rows).toHaveLength(3);
+  });
+
+  it("recusa outros esquemas, usuário antes do domínio, espaço e controle", async () => {
+    for (const bad of [
+      "http://x.dev",
+      "javascript:alert(1)",
+      "data:text/html,<script>",
+      "file:///etc/passwd",
+      "https://banco.com@golpe.com/login",
+      "https://x.dev/a b",
+      "https://x.dev/\u0007",
+    ])
+      await expect(send(bad)).rejects.toThrow(/invalid_source/);
+  });
+
+  it("texto com cara de SQL é guardado como texto, sem efeito", async () => {
+    await send("'); drop table dailycards.cards; --");
+    const n = await db.query<{ n: number }>("select count(*)::int n from dailycards.cards");
+    expect(n.rows[0].n).toBeGreaterThan(0);
+  });
+});

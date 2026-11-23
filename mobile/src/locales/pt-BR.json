@@ -2,62 +2,265 @@
   "app": {
     "name": "Daily Cards"
   },
+  "common": {
+    "continue": "Continuar",
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "close": "Fechar",
+    "send": "Enviar",
+    "save": "Salvar",
+    "retry": "Tentar de novo",
+    "loading": "Carregando…",
+    "or": "ou"
+  },
+  "errors": {
+    "network": "Sem conexão. Confira a internet e tente de novo.",
+    "unknown": "Algo deu errado. Tente de novo em instantes.",
+    "premium_required": "Isso faz parte do premium.",
+    "rate_limited": "Você chegou ao limite de sugestões por hoje. Obrigado por ajudar!",
+    "card_not_found": "Esse conteúdo não está mais disponível.",
+    "not_authenticated": "Sua sessão expirou. Entre de novo.",
+    "area_not_found": "Essa profissão não está disponível.",
+    "area_not_followed": "Você não segue essa profissão.",
+    "invalid_source": "A fonte precisa ser um link https ou o nome da referência (livro, artigo, norma)."
+  },
   "onboarding": {
-    "chooseProfession": "Qual é a sua profissão?",
-    "professionMissing": "Minha profissão não está aqui",
+    "welcome": {
+      "title": "Fique afiado na sua profissão",
+      "subtitle": "Um conhecimento novo por dia, em 30 segundos.",
+      "quick": "30 segundos por dia",
+      "sourced": "Sempre com fonte confiável",
+      "widget": "Direto na tela inicial do celular",
+      "start": "Começar",
+      "exampleArea": "Odontologia",
+      "exampleText": "CPO-D: dentes permanentes cariados, perdidos e obturados por pessoa",
+      "exampleSource": "Fonte: OMS"
+    },
+    "haveAccount": "Já tenho conta",
+    "area": {
+      "title": "Qual é a sua área?",
+      "count_one": "{{count}} profissão",
+      "count_other": "{{count}} profissões"
+    },
+    "profession": {
+      "title": "Qual é a sua profissão?",
+      "career": "Carreira e negócio",
+      "missing": "Minha profissão não está aqui"
+    },
     "relationship": {
-      "title": "Qual é a sua relação com essa área?",
+      "title": "Qual é a sua relação com a área?",
       "works": "Já atuo",
-      "studies": "Sou estudante",
-      "curious": "Só curiosidade"
+      "worksHint": "Trabalho na área",
+      "studies": "Estou estudando",
+      "studiesHint": "Faculdade, curso ou residência",
+      "curious": "Tenho curiosidade",
+      "curiousHint": "Quero conhecer a área"
+    },
+    "preview": {
+      "title": "Seu primeiro conhecimento",
+      "empty": "O conteúdo dessa profissão está sendo preparado.",
+      "createAccount": "Criar conta e receber todo dia",
+      "start": "Começar"
+    },
+    "waitlist": {
+      "title": "Avisamos quando chegar",
+      "profession": "Sua profissão",
+      "email": "E-mail",
+      "submit": "Quero ser avisado",
+      "done": "Pronto! Você recebe um e-mail quando essa profissão entrar."
     }
+  },
+  "auth": {
+    "signUpTitle": "Crie sua conta",
+    "signUpSubtitle": "Para receber um conhecimento novo todo dia e guardar o que aprendeu.",
+    "signInTitle": "Bem-vindo de volta",
+    "email": "E-mail",
+    "password": "Senha",
+    "passwordHint": "Pelo menos 8 caracteres",
+    "newPassword": "Nova senha",
+    "signUp": "Criar conta",
+    "signIn": "Entrar",
+    "google": "Continuar com Google",
+    "apple": "Continuar com Apple",
+    "forgot": "Esqueci minha senha",
+    "toSignIn": "Já tenho conta",
+    "toSignUp": "Criar uma conta",
+    "checkEmailTitle": "Confirme seu e-mail",
+    "checkEmail": "Enviamos um link para {{email}}. Abra o link neste celular para entrar.",
+    "forgotTitle": "Recuperar senha",
+    "forgotSubtitle": "Enviamos um link para criar uma senha nova.",
+    "forgotSend": "Enviar link",
+    "forgotSent": "Se houver uma conta com esse e-mail, o link chega em alguns minutos.",
+    "resetTitle": "Nova senha",
+    "callbackLoading": "Entrando…",
+    "callbackFailed": "Não foi possível entrar com esse link. Ele pode ter expirado.",
+    "errors": {
+      "invalid_credentials": "E-mail ou senha incorretos.",
+      "email_not_confirmed": "Confirme seu e-mail antes de entrar.",
+      "user_exists": "Já existe uma conta com esse e-mail.",
+      "weak_password": "Escolha uma senha mais forte.",
+      "rate_limited": "Muitas tentativas. Espere alguns minutos.",
+      "cancelled": "Login cancelado.",
+      "invalid_email": "Digite um e-mail válido.",
+      "short_password": "A senha precisa de pelo menos 8 caracteres.",
+      "unknown": "Não foi possível entrar agora. Tente de novo."
+    }
+  },
+  "setup": {
+    "loading": "Preparando seu conteúdo…"
+  },
+  "tabs": {
+    "today": "Hoje",
+    "explore": "Explorar",
+    "saved": "Salvos",
+    "profile": "Perfil"
+  },
+  "today": {
+    "empty": "O conteúdo de hoje ainda não saiu nessa profissão. Volte amanhã.",
+    "trendEmpty": "A novidade desta semana ainda não foi publicada.",
+    "offline": "Sem conexão: mostrando o que já está salvo no celular.",
+    "tomorrow": "Amanhã"
   },
   "card": {
     "types": {
       "term": "Termo",
-      "tip": "Dica",
+      "tip": "Na prática",
       "question": "Pergunta",
-      "trend": "Trend"
+      "trend": "Novidade"
     },
-    "source": "Fonte",
-    "rate": "Avalie este card",
-    "suggestFix": "Sugerir correção",
-    "seeExplanation": "Ver explicação"
+    "source": "Fonte: {{label}}",
+    "factDate": "Fato de {{date}}",
+    "communityUpdated": "Atualizado com sugestões da comunidade",
+    "rate": "Isso foi útil?",
+    "rated": "Obrigado pela nota",
+    "suggestFix": "Corrigir",
+    "favorite": "Salvar",
+    "favorited": "Salvo",
+    "share": "Enviar",
+    "shareFooter": "Via Daily Cards",
+    "correct": "Resposta certa",
+    "wrong": "A resposta certa é: {{answer}}",
+    "lockedTitle": "Entenda a resposta com o premium",
+    "lockedBody": "No grátis você responde; a explicação faz parte do premium.",
+    "seePremium": "Conhecer o premium",
+    "outdated": "Pode estar desatualizado"
   },
   "report": {
+    "title": "Sugerir correção",
+    "subtitle": "Vai para a revisão. Avisamos por e-mail quando for aplicada.",
+    "category": "O que está errado?",
     "categories": {
       "incorrect": "Informação incorreta",
       "outdated": "Desatualizada",
       "incomplete": "Incompleta",
       "confusing": "Explicação confusa",
       "context": "Depende do contexto"
-    }
+    },
+    "text": "O que mudar",
+    "textPlaceholder": "Explique o que está errado",
+    "source": "Fonte (opcional)",
+    "sourcePlaceholder": "Link https ou nome do livro, artigo ou norma",
+    "sent": "Obrigado! Sua sugestão foi enviada."
+  },
+  "settings": {
+    "professions": "Profissões",
+    "addProfession": "Adicionar profissão",
+    "removeProfession": "Deixar de seguir",
+    "removeConfirm": "Deixar de seguir {{name}}? Se voltar a seguir, sua sequência recomeça.",
+    "primary": "Principal",
+    "plan": "Plano",
+    "free": "Grátis",
+    "premium": "Premium",
+    "premiumUntil": "Premium até {{date}}",
+    "seePremium": "Conhecer o premium",
+    "account": "Conta",
+    "signOut": "Sair",
+    "deleteAccount": "Excluir conta",
+    "deleteConfirmTitle": "Excluir conta?",
+    "deleteConfirm": "Sua conta, notas, sugestões e itens salvos serão apagados. Uma assinatura ativa precisa ser cancelada na loja.",
+    "deleteAction": "Excluir",
+    "deleted": "Conta excluída.",
+    "about": "Sobre",
+    "howWeReview": "Como revisamos o conteúdo",
+    "terms": "Termos de uso",
+    "privacy": "Política de privacidade",
+    "version": "Versão {{version}}"
+  },
+  "addArea": {
+    "title": "Adicionar profissão",
+    "following": "Você já segue"
+  },
+  "premium": {
+    "title": "Premium",
+    "subtitle": "O conhecimento do dia continua grátis. O premium libera o resto.",
+    "benefits": {
+      "widget": "O conhecimento do dia na tela inicial",
+      "explanation": "A explicação de todas as perguntas",
+      "archive": "Tudo o que já saiu em Explorar e todos os seus salvos",
+      "professions": "Todas as profissões ao mesmo tempo"
+    },
+    "trial": "7 dias grátis para testar",
+    "comingSoon": "A assinatura abre em breve no app.",
+    "close": "Agora não"
   },
   "group": {
-    "tecnologia": "Tecnologia",
-    "negocios": "Negócios",
+    "technology": "Tecnologia",
+    "business": "Negócios",
     "design": "Design",
-    "educacao": "Educação",
-    "saude": "Saúde",
-    "direito": "Direito",
-    "arquitetura_engenharia": "Arquitetura e engenharia"
+    "education": "Educação",
+    "health": "Saúde",
+    "law": "Direito",
+    "architecture_engineering": "Arquitetura e engenharia"
   },
   "area": {
-    "desenvolvimentoSoftware": "Desenvolvimento de software",
-    "iaAplicada": "IA aplicada",
-    "marketingDigital": "Marketing digital",
-    "socialMediaCriadores": "Social media e criadores de conteúdo",
-    "produto": "Produto (PM)",
-    "rh": "RH",
-    "corretorImoveis": "Corretor de imóveis",
-    "designUxUi": "Design (UX/UI)",
-    "professores": "Professores",
-    "odontologia": "Odontologia",
-    "direito": "Direito",
-    "arquitetura": "Arquitetura",
-    "engenhariaCivil": "Engenharia civil",
-    "nutricao": "Nutrição",
-    "fisioterapia": "Fisioterapia",
-    "educacaoFisica": "Educação física"
+    "software": "Desenvolvimento de software",
+    "artificial_intelligence": "Inteligência Artificial",
+    "infrastructure": "Infraestrutura e redes",
+    "cloud_devops": "Cloud e DevOps",
+    "cybersecurity": "Cibersegurança",
+    "digital_marketing": "Marketing digital",
+    "social_media": "Social media e criadores de conteúdo",
+    "product": "Produto (PM)",
+    "hr": "RH",
+    "real_estate": "Corretor de imóveis",
+    "ux_ui": "Design (UX/UI)",
+    "teachers": "Professores",
+    "dentistry": "Odontologia",
+    "law": "Direito",
+    "architecture": "Arquitetura",
+    "civil_engineering": "Engenharia civil",
+    "nutrition": "Nutrição",
+    "physiotherapy": "Fisioterapia",
+    "physical_education": "Educação física"
+  },
+  "explore": {
+    "types": {
+      "term": "Termos",
+      "tip": "Na prática",
+      "question": "Perguntas",
+      "trend": "Novidades"
+    },
+    "searchLabel": "Buscar termo",
+    "searchPlaceholder": "Ex.: idempotência",
+    "noMatch": "Nenhum termo com esse texto.",
+    "score": "Você acertou {{right}} de {{answered}} respondidas.",
+    "status": {
+      "right": "Acertou",
+      "wrong": "Errou",
+      "open": "Não respondida"
+    },
+    "empty": {
+      "term": "Os termos que já saíram ficam aqui, em ordem alfabética.",
+      "tip": "O que já saiu em Na prática fica aqui.",
+      "question": "As perguntas dos dias anteriores ficam aqui, com o que você acertou.",
+      "trend": "As novidades das semanas anteriores ficam aqui."
+    },
+    "older": "Ver mais antigos",
+    "freeLimit": "No grátis, você vê o que saiu nos últimos 3 dias.",
+    "unlock": "Ver tudo com o premium"
+  },
+  "saved": {
+    "all": "Todos",
+    "empty": "Toque em Salvar em qualquer conteúdo para guardar aqui."
   }
 }

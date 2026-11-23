@@ -1,56 +1,46 @@
-# Welcome to your Expo app 👋
+# Daily Cards — app (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+App React Native com Expo Router (SDK 58). Fala direto com o Supabase no schema `dailycards`, pelo contrato descrito em [`../backend/README.md`](../backend/README.md#contrato-para-o-app-expo).
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Rodar
 
 ```bash
-npm run reset-project
+cp .env.example .env.local     # preencher Supabase e URL do backend
+pnpm --filter @daily-cards/mobile start
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+Dependência nativa entra sempre com `pnpm --filter @daily-cards/mobile exec expo install <pacote>`.
+Antes de dar uma tarefa por concluída: `pnpm --filter @daily-cards/mobile typecheck` e `pnpm --filter @daily-cards/mobile lint`.
 
-### Other setup steps
+## Telas
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+| Rota | Arquivo | O quê |
+| --- | --- | --- |
+| `/` | `(onboarding)/index.tsx` | Boas-vindas: o que a pessoa ganha, com uma prévia |
+| `/area` | `(onboarding)/area.tsx` | Área (Saúde, Tecnologia…) em grade |
+| `/profession` | `(onboarding)/profession.tsx` | Profissão dentro da área escolhida |
+| `/relationship` | `(onboarding)/relationship.tsx` | Já atuo, Estou estudando ou Tenho curiosidade |
+| `/preview` | `(onboarding)/preview.tsx` | Primeiro conhecimento (`get_sample`) antes da conta |
+| `/waitlist` | `(onboarding)/waitlist.tsx` | "Minha profissão não está aqui" (`join_waitlist`) |
+| `/sign-up`, `/sign-in`, `/forgot` | `(auth)/` | E-mail e senha, Google, Apple (só iOS) |
+| `/auth/callback`, `/auth/reset` | `auth/` | Retorno do OAuth, confirmação de e-mail e nova senha |
+| `/today`, `/explore`, `/saved`, `/profile` | `(app)/(tabs)/` | Hoje; Explorar (o que já saiu, por tipo: termos em ordem alfabética com busca, perguntas com acertou/errou); Salvos; Perfil (profissões, plano, conta) |
+| `/card/[id]`, `/report/[cardId]` | `(app)/` | Card aberto e sugestão de correção |
+| `/premium`, `/add-area` | `(app)/` | Oferta do premium e seguir outra profissão |
 
-## Learn more
+As guardas ficam em `src/app/_layout.tsx` (`Stack.Protected`): sem conta vê onboarding e login; logado sem profissão volta ao onboarding; logado com profissão vê as abas.
+As escolhas do onboarding ficam no aparelho até a conta existir; no primeiro login, `src/providers/session.tsx` chama `save_profile` e `follow_area` com elas.
 
-To learn more about developing your project with Expo, look at the following resources:
+## Organização
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `src/lib/api.ts`: todas as chamadas ao Supabase e ao backend, com os códigos de erro das RPCs.
+- `src/lib/auth.ts`: login (PKCE). As URLs `dailycards://auth/callback` e `dailycards://auth/reset` (e as do Expo Go/dev build, que o app gera com `Linking.createURL`) precisam estar em Authentication › URL Configuration › Redirect URLs no Supabase.
+- `src/lib/storage.ts`: cache local da trilha (hoje-2 até hoje+14), base para o modo offline e para o widget.
+- `src/lib/answers.ts`: respostas às perguntas guardadas no aparelho (acertou/errou em Explorar e ao reabrir).
+- `src/constants/theme.ts` e `src/components/ui.tsx`: estilo B quente (aba Design do documento do MVP); ícones em `src/components/icon.tsx` (SF Symbols no iOS, Material Symbols no Android).
+- `scripts/screenshots/`: capturas de tela no web com Supabase simulado.
+- `src/locales/pt-BR.json`: todos os textos. Profissões e áreas usam as chaves `name_key` e `group_key` do banco.
 
-## Join the community
+## O que ainda falta
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Widget Android (Glance) lendo o cache local, notificação diária, RevenueCat (`Purchases.logIn` com o id do Supabase) e analytics. Ver a aba Backlog do documento do MVP.

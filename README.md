@@ -1,8 +1,8 @@
 # Daily Cards (nome provisório)
 
-App de conhecimento diário por profissão: um card por dia no widget, trends com fonte, nota e sugestão de correção, paywall por assinatura. Lançamento no Android, em pt-BR, com código e dados prontos para outros países.
+App de conhecimento diário por profissão, com widget, fonte em todo conteúdo e sugestão de correção.
 
-Documento do MVP: https://claude.ai/artifact/4jMVU5CVyc3acZixbxdp2q
+Este repositório é público e tem só código. Plano do produto, backlog, design, conteúdo e fontes ficam no documento privado do MVP (pede acesso): https://claude.ai/artifact/4jMVU5CVyc3acZixbxdp2q
 
 ## Estrutura
 
@@ -30,9 +30,9 @@ No app, dependência nativa entra sempre com `pnpm --filter @daily-cards/mobile 
 
 ## Decisões já tomadas
 
-- **Pacote Android:** `co.mosaiclabs.dailycards`. Não muda depois de publicado no Google Play; confirmar antes do primeiro upload.
+- **Pacote Android:** `co.mosaiclabs.dailycards`.
 - **Dados do app:** catálogo de profissões é público por RLS; cards e feedback só por RPC. Limites do plano grátis são aplicados no banco, nunca só na interface.
 - **Premium:** só via webhook do RevenueCat gravando `subscriptions`; o app nunca informa o próprio plano.
-- **Conta Google Play pessoal:** primeiro lançamento exige teste fechado com 12+ testadores por 14 dias seguidos.
+- **Entrada de terceiros:** regras de SQL, links, feeds e IA em [`AGENTS.md`](AGENTS.md#entrada-de-terceiros).
 
-Backlog em [`TASKS.md`](TASKS.md).
+Backlog: aba Backlog do documento do MVP.

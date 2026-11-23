@@ -18,6 +18,8 @@ export const supabase = createClient(url, key, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
+    // PKCE: login com Google/Apple pelo navegador e links de confirmação e de nova senha voltam com ?code=.
+    flowType: 'pkce',
   },
 });
 

@@ -12,6 +12,7 @@ export const resources = {
 const supported = Object.keys(resources);
 const device = getLocales()[0]?.languageTag ?? 'pt-BR';
 
+// eslint-disable-next-line import/no-named-as-default-member -- API documentada do i18next
 void i18n.use(initReactI18next).init({
   resources,
   lng: supported.includes(device) ? device : 'pt-BR',

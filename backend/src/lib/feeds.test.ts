@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { parseFeed } from "./feeds";
+import { isPublicHttps, parseFeed } from "./feeds";
 
 it("lê RSS 2.0", () => {
   const xml = `<?xml version="1.0"?><rss><channel>
@@ -18,4 +18,25 @@ it("lê Atom com vários links", () => {
     <updated>2026-11-11T00:00:00Z</updated><summary>Resumo</summary>
   </entry></feed>`;
   expect(parseFeed(xml)[0]).toMatchObject({ url: "https://x.dev/post", title: "Lançamento", summary: "Resumo" });
+});
+
+it("recusa XML com entidade declarada", () => {
+  const xml = `<?xml version="1.0"?><!DOCTYPE r [<!ENTITY a "aaaa"><!ENTITY b "&a;&a;&a;">]><rss><channel><item><title>&b;</title><link>https://x.dev</link></item></channel></rss>`;
+  expect(() => parseFeed(xml)).toThrow();
+});
+
+it("só busca feed em https público", () => {
+  expect(isPublicHttps("https://kubernetes.io/feed.xml")).toBe(true);
+  for (const bad of [
+    "http://kubernetes.io/feed.xml",
+    "https://localhost/x",
+    "https://127.0.0.1/x",
+    "https://169.254.169.254/latest/meta-data",
+    "https://10.0.0.5/x",
+    "https://192.168.0.1/x",
+    "https://[::1]/x",
+    "https://user:pass@x.dev/feed",
+    "file:///etc/passwd",
+  ])
+    expect(isPublicHttps(bad)).toBe(false);
 });

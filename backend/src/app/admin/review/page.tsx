@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin";
 import { CARD_STATUS, CARD_TYPES, REPORT_CATEGORIES } from "@/lib/catalog";
+import { hostsOf, isKnownHost, parseHttpsUrl } from "@/lib/urls";
 import { decide } from "./actions";
 
 type Report = {
@@ -38,6 +39,12 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
         .select("id, type, status, current_version, areas(slug), card_versions(version, widget_text)")
         .in("id", ids)
     : { data: [] };
+  // Domínios que já usamos como fonte; link de domínio novo não vira clique.
+  const [versions, sources] = await Promise.all([
+    supabase.from("card_versions").select("source_url"),
+    supabase.from("trend_sources").select("url"),
+  ]);
+  const known = hostsOf([...(versions.data ?? []).map((v) => v.source_url), ...(sources.data ?? []).map((t) => t.url)]);
   const byCard = new Map<string, Report[]>();
   for (const r of (reports ?? []) as Report[]) byCard.set(r.card_id, [...(byCard.get(r.card_id) ?? []), r]);
   const ordered = ((cards ?? []) as unknown as Card[]).sort(
@@ -72,11 +79,7 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
                 <li key={r.id}>
                   {r.priority && "⚑ "}
                   <strong>{REPORT_CATEGORIES[r.category]}</strong> (v{r.version}){r.text ? `: ${r.text}` : ""}
-                  {r.source && (
-                    <a className="ml-1 underline" href={r.source} target="_blank" rel="noreferrer">
-                      fonte
-                    </a>
-                  )}
+                  {r.source && <SuggestedSource raw={r.source} known={known} />}
                 </li>
               ))}
             </ul>
@@ -97,5 +100,25 @@ export default async function ReviewPage({ searchParams }: { searchParams: Promi
         );
       })}
     </div>
+  );
+}
+
+// Fonte sugerida por usuário. Texto livre aparece como texto. Link só é clicável se o domínio já é
+// fonte nossa; nos outros, mostra o domínio (em punycode, se tiver letra de outro alfabeto) e o
+// endereço como texto para copiar, sem abrir nada.
+function SuggestedSource({ raw, known }: { raw: string; known: Set<string> }) {
+  const url = parseHttpsUrl(raw);
+  if (!url) return <span className="muted ml-1">· fonte citada: {raw}</span>;
+  if (isKnownHost(url.host, known))
+    return (
+      <a className="ml-1 underline" href={url.href} target="_blank" rel="noopener noreferrer nofollow">
+        fonte ({url.host})
+      </a>
+    );
+  return (
+    <span className="ml-1">
+      · fonte em domínio novo <strong>{url.host}</strong>:{" "}
+      <code className="select-all break-all text-xs">{url.href}</code>
+    </span>
   );
 }
